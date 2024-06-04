@@ -9,12 +9,14 @@
 
 	<ul>
 		<li> <a href = "/">Inicio</a> </li>
-		<li> <a href = "/dashboard">Dashboard</a> </li>
 
 		{% if user.is_authenticated %}
+			<li> <a href = "/dashboard">Dashboard</a> </li>
+			<li> <a href = "/trasaction">Transacciones</a> </li>
 			<li> <a href = "/logout">Salir</a> </li>
 		{% else %}
-			<li> <a href = "/signup">Iniciar sesión</a> </li>
+			<li> <a href = "/signin">Iniciar sesión</a> </li>
+			<li> <a href = "/signup">Crear cuenta</a> </li>
 		{% endif %}
 	</ul>
 
