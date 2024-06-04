@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Money Manager</title>
+</head>
+<body>
+
+	<ul>
+		<li> <a href = "/">Inicio</a> </li>
+		<li> <a href = "/dashboard">Dashboard</a> </li>
+
+		{% if user.is_authenticated %}
+			<li> <a href = "/logout">Salir</a> </li>
+		{% else %}
+			<li> <a href = "/signup">Iniciar sesión</a> </li>
+		{% endif %}
+	</ul>
+
+	{% block content %}
+	{% endblock %}
+
+</body>
+</html>
