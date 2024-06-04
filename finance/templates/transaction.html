@@ -3,12 +3,6 @@
 {% block content %}
 	<h1>Transacciones</h1>
 
-	<form action='/transaction/', method="POST">
-		{% csrf_token %}
-		{{form.as_p}}
-
-		<button>Guardar</button>
-	</form>
-
+	<a href = "/transaction/create">Añadir</a>
 
 {% endblock %}

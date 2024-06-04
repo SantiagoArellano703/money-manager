@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 from django.db import IntegrityError
-from .forms import create_transaction
+from .forms import create_transaction_form
 
 # Create your views here.
 
@@ -56,9 +56,14 @@ def signin(request):
 		return redirect('dashboard')
 
 def transaction(request):
+	return render(request, "transaction.html")
 
+def create_transaction(request):
 	if request.method == 'GET':
-		return render(request, "transaction.html", {'form': create_transaction})
+		return render(request, "create_transaction.html", {'form': create_transaction_form})
 	else:
-		print(request.POST)
-		return render(request, "transaction.html", {'form': create_transaction})
+		form = create_transaction_form(request.POST)
+		new_transaction = form.save(commit=False)
+		new_transaction.user = request.user
+		new_transaction.save()
+		return redirect('transaction')

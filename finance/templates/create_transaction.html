@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Nueva Transacción</h1>
+
+	<form action='/transaction/create/', method="POST">
+		{% csrf_token %}
+		{{form.as_p}}
+		<button>Guardar</button>
+	</form>
+
+
+{% endblock %}
