@@ -3,6 +3,8 @@
 {% block content %}
 	<h1>Nueva Transacción</h1>
 
+	{{error}}
+	
 	<form action='/transaction/create/', method="POST">
 		{% csrf_token %}
 		{{form.as_p}}

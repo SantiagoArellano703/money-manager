@@ -3,6 +3,23 @@
 {% block content %}
 	<h1>Transacciones</h1>
 
+	<ul>
+		{% for transaction in transactions %}
+			<li>
+				<a href="{% url 'transaction_details' transaction.id %}">
+					{% if transaction.category == 'INGRESO' %}
+						<p> + </p>
+					{% else %}
+						<p> - </p>
+					{% endif %}
+
+					<p> {{transaction.description}} </p>			
+					<p> {{transaction.value}} </p>	
+				</a>
+			</li>	
+		{% endfor %}
+	</ul>
+
 	<a href = "/transaction/create">Añadir</a>
 
 {% endblock %}
