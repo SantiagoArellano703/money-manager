@@ -3,6 +3,25 @@
 {% block content %}
 	<h1>Transacciones</h1>
 
+	<form action="/transaction/" method="GET">
+		<label>
+			<input type="radio" name="filter" value="INGRESO" 
+				{% if 'INGRESO' in category %} checked {% endif %}> Ingresos
+		</label>
+
+		<label>
+			<input type="radio" name="filter" value="GASTO"
+				{% if 'GASTO' in category %} checked {% endif %}> Gastos
+		</label>
+		
+		<label>
+			<input type="radio" name="filter" value="AMBOS"
+				{% if 'AMBOS' in category %} checked {% endif %}> Ambos
+		</label>
+			
+		<button>Filtrar</button>	
+	</form>
+
 	<ul>
 		{% for transaction in transactions %}
 			<li>

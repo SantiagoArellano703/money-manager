@@ -5,10 +5,15 @@
 
 	{{error}}
 
-	<form method="POST">
+	<form action="{% url 'transaction_details' transaction.id %}" method="POST">
 		{% csrf_token %}
 		{{form.as_p}}
 
 		<button>Actualizar</button>	
+	</form>
+
+	<form action="{% url 'delete_transaction' transaction.id %}" method="POST">
+		{% csrf_token %}
+		<button>Eliminar</button>	
 	</form>
 {% endblock %}
