@@ -7,7 +7,26 @@
 
 	<form action="{% url 'transaction_details' transaction.id %}" method="POST">
 		{% csrf_token %}
-		{{form.as_p}}
+		<div class="form-trans">
+			<p>Tipo</p>
+			
+			<input type="radio" name="category" id="income" value="INGRESO" required
+			{% if 'INGRESO' in transaction.category %} checked {% endif %}>
+			<label for="income">Ingreso</label>
+			<input type="radio" name="category" id="expense" value="GASTO" required
+			{% if 'GASTO' in transaction.category %} checked {% endif %}>
+			<label for="expense">Gasto</label>
+		</div>
+
+		<div class="form-trans">
+			<label for="value">Monto</label>
+			<input type="number" step="0.01" value={{transaction.value}} min="0" pattern="^[0-9]+" name="value" id="value" required>
+		</div>
+
+		<div class="form-trans">
+			<label for="description">Descripción</label>
+			<textarea name="description" id="description" maxlength="100" required>{{transaction.description}}</textarea>
+		</div>
 
 		<button>Actualizar</button>	
 	</form>

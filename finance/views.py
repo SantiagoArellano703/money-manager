@@ -15,7 +15,7 @@ def home(request):
 # Registro y login
 def signup(request):
 	if request.method == 'GET':
-		return render(request, "signup.html", {'form': UserCreationForm})
+		return render(request, "signup.html")
 	else:
 		if request.POST['password1'] == request.POST['password2']:
 			try:			
@@ -25,15 +25,9 @@ def signup(request):
 				login(request, user)
 				return redirect('dashboard')
 			except IntegrityError:
-				return render(request, "signup.html", {
-					'form': UserCreationForm,
-					'error': "Usuario existente."
-				})
+				return render(request, "signup.html", {'error': "Usuario existente."})
 
-		return render(request, "signup.html", {
-				'form': UserCreationForm,
-				'error': "Las contraseñas no coinciden."
-			})
+		return render(request, "signup.html", {'error': "Las contraseñas no coinciden."})
 
 def signout(request):
 	logout(request)
@@ -41,15 +35,12 @@ def signout(request):
 
 def signin(request):
 	if request.method == 'GET':
-		return render(request, "signin.html", {'form': AuthenticationForm})
+		return render(request, "signin.html")
 	else:
 		user = authenticate(request, username = request.POST['username'], password = request.POST['password'])
 
 		if user is None:
-			return render(request, "signin.html", {
-					'form': AuthenticationForm,
-					'error': 'Usuario o contraseña incorrecta.'
-				})
+			return render(request, "signin.html", {'error': 'Usuario o contraseña incorrecta.'})
 
 		login(request, user)
 		return redirect('dashboard')
@@ -87,7 +78,7 @@ def transaction(request):
 @login_required
 def create_transaction(request):
 	if request.method == 'GET':
-		return render(request, "create_transaction.html", {'form': create_transaction_form})
+		return render(request, "create_transaction.html")
 	else:
 		try:
 			form = create_transaction_form(request.POST)
@@ -96,28 +87,21 @@ def create_transaction(request):
 			new_transaction.save()
 			return redirect('transaction')
 		except ValueError:
-			return render(request, "create_transaction.html", {
-					'form': create_transaction_form,
-					'error': 'Por favor ingresa datos válidos'
-				})
+			return render(request, "create_transaction.html", {'error': 'Por favor ingresa datos válidos'})
 
 @login_required
 def transaction_details(request, id_transaction):
 	trans = get_object_or_404(Transaction, pk=id_transaction, user=request.user)
 
 	if request.method == 'GET':
-		form = create_transaction_form(instance=trans)
-		return render(request, 'transaction_details.html', {'transaction': trans, 'form': form})
+		return render(request, 'transaction_details.html', {'transaction': trans})
 	else:
 		try:
 			form = create_transaction_form(request.POST, instance=trans)
 			form.save()
 			return redirect('transaction')
 		except ValueError:
-			return render(request, "transaction_details.html", {
-					'form': form,
-					'error': 'Por favor ingresa datos válidos'
-					})
+			return render(request, "transaction_details.html", {'error': 'Por favor ingresa datos válidos'})
 
 @login_required
 def delete_transaction(request, id_transaction):
