@@ -12,3 +12,11 @@ class Transaction(models.Model):
 	def __str__(self):
 		return self.description + " - por " + self.user.username
 		
+class Saving(models.Model):
+	current_value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+	goal = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+	percentage = models.DecimalField(max_digits=5, decimal_places=2, default = 0.00)
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return f'Ahorro de {self.user.username}'

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<h1>Ahorros</h1>
+
+	{% if saving == None %}
+		<p>No tienes ahorros aún</p>
+
+		<form action="{% url 'create_saving' %}" method="POST">
+			{% csrf_token %}
+			<button>Crear</button>	
+		</form>
+
+	{% else %}
+		<p>{{saving.current_value}}</p>
+		<p>{{saving.goal}}</p>
+
+		<form action="{% url 'create_saving' %}" method="POST">
+			{% csrf_token %}
+			<button>Modificar</button>	
+		</form>
+
+		<form action="{% url 'delete_saving' %}" method="POST">
+			{% csrf_token %}
+			<button>Eliminar</button>	
+		</form>
+	{% endif %}
+
+	
+{% endblock %}
