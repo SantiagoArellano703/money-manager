@@ -31,5 +31,5 @@ urlpatterns = [
     path('transaction/<int:id_transaction>/delete', views.delete_transaction, name = 'delete_transaction'),
     path('savings/', views.savings, name = 'savings'),
     path('savings/create/', views.create_saving, name = 'create_saving'),
-    path('savings/delete/', views.delete_saving, name = 'delete_saving')
+    path('savings/delete/<int:used>', views.delete_saving, name = 'delete_saving')
 ]

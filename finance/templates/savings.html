@@ -7,7 +7,7 @@
 	{% if saving == None %}
 		<p>No tienes ahorros aún</p>
 
-		<form action="{% url 'create_saving' %}" method="POST">
+		<form action="{% url 'create_saving' %}" method="GET">
 			{% csrf_token %}
 			<button>Crear</button>	
 		</form>
@@ -16,12 +16,16 @@
 		<p>{{saving.current_value}}</p>
 		<p>{{saving.goal}}</p>
 
-		<form action="{% url 'create_saving' %}" method="POST">
-			{% csrf_token %}
-			<button>Modificar</button>	
-		</form>
+		{% if saving.current_value == saving.goal %}
+			<p>Felicitaciones, alcanzaste la meta de ahorro</p>
 
-		<form action="{% url 'delete_saving' %}" method="POST">
+			<form action="{% url 'delete_saving' 1 %}" method="POST">
+				{% csrf_token %}
+				<button>Utilizar</button>	
+			</form>
+		{% endif %}
+
+		<form action="{% url 'delete_saving' 0 %}" method="POST">
 			{% csrf_token %}
 			<button>Eliminar</button>	
 		</form>

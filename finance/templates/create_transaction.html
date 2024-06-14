@@ -23,6 +23,17 @@
 		</div>
 
 		<div class="form-trans">
+			<p>Metodo de pago</p>
+			
+			<input type="radio" name="payment_method" id="efectivo" value="EFECTIVO" required>
+			<label for="efectivo">Efectivo</label>
+			<input type="radio" name="payment_method" id="banco" value="BANCO" required>
+			<label for="banco">Cuenta Bancaria</label>
+			<input type="radio" name="payment_method" id="cripto" value="CRIPTO" required>
+			<label for="cripto">Criptomoneda</label>
+		</div>
+
+		<div class="form-trans">
 			<label for="description">Descripción</label>
 			<textarea name="description" id="description" maxlength="100" required></textarea>
 		</div>

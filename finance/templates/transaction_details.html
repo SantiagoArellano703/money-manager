@@ -24,6 +24,20 @@
 		</div>
 
 		<div class="form-trans">
+			<p>Metodo de pago</p>
+			
+			<input type="radio" name="payment_method" id="efectivo" value="EFECTIVO" required
+			{% if 'EFECTIVO' in transaction.payment_method %} checked {% endif %}>
+			<label for="efectivo">Efectivo</label>
+			<input type="radio" name="payment_method" id="banco" value="BANCO" required
+			{% if 'BANCO' in transaction.payment_method %} checked {% endif %}>
+			<label for="banco">Cuenta Bancaria</label>
+			<input type="radio" name="payment_method" id="cripto" value="CRIPTO" required
+			{% if 'CRIPTO' in transaction.payment_method %} checked {% endif %}>
+			<label for="cripto">Criptomoneda</label>
+		</div>
+
+		<div class="form-trans">
 			<label for="description">Descripción</label>
 			<textarea name="description" id="description" maxlength="100" required>{{transaction.description}}</textarea>
 		</div>

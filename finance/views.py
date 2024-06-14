@@ -8,7 +8,7 @@ from django.db import IntegrityError
 from .forms import create_transaction_form, create_saving_form
 from .models import Transaction, Saving
 from decimal import Decimal
-from .utils.saving_service import *
+from .utils.services import *
 
 # Inicio
 def home(request):
@@ -52,22 +52,7 @@ def signin(request):
 def dashboard(request):
 	transactions = Transaction.objects.filter(user = request.user)
 
-	try:
-		saving = Saving.objects.get(user=request.user)
-	except Saving.DoesNotExist:
-		saving = None
-
-	saving_current = saving.current_value if saving != None else 0.00
-
-	incomes = expenses = 0
-	for trans in transactions:
-		if trans.category == 'INGRESO':
-			incomes += trans.value
-		else:
-			expenses += trans.value  
-
-	total = incomes - expenses
-	avaible = total - saving_current
+	(total, avaible, incomes, expenses, saving_current) = get_data(request)
 
 	return render(request, 'dashboard.html', {
 		'total': total, 'incomes': incomes, 'expenses': expenses,
@@ -93,15 +78,15 @@ def create_transaction(request):
 		return render(request, "create_transaction.html")
 	else:
 		try:
+			(total, avaible, incomes, expenses, saving_current) = get_data(request)
+
+			if request.POST['category'] == 'GASTO' and int(request.POST['value']) > int(avaible):
+				return render(request, "create_transaction.html", {'error': 'El saldo disponible es insuficiente.'})
+
 			form = create_transaction_form(request.POST)
 			new_transaction = form.save(commit=False)
 			new_transaction.user = request.user
 			new_transaction.save()
-
-			#Ahorro
-			if 'INGRESO' in new_transaction.category:
-				make_saving(0, new_transaction.value, request)
-
 			return redirect('transaction')
 		except ValueError:
 			return render(request, "create_transaction.html", {'error': 'Por favor ingresa datos válidos'})
@@ -117,11 +102,6 @@ def transaction_details(request, id_transaction):
 		try:
 			form = create_transaction_form(request.POST, instance=trans)
 			form.save()
-
-			#Ahorro
-			if 'INGRESO' in trans.category:
-				make_saving(income, trans.value, request)
-
 			return redirect('transaction')
 		except ValueError:
 			return render(request, "transaction_details.html", {'error': 'Por favor ingresa datos válidos'})
@@ -131,9 +111,6 @@ def delete_transaction(request, id_transaction):
 	trans = get_object_or_404(Transaction, pk=id_transaction, user=request.user)
 
 	if request.method == 'POST':
-		if 'INGRESO' in trans.category:
-			update_saving(trans.value, request)
-
 		trans.delete()
 	return redirect('transaction')
 
@@ -141,7 +118,9 @@ def delete_transaction(request, id_transaction):
 
 @login_required
 def savings(request):
+
 	try:
+		get_data(request)
 		saving = Saving.objects.get(user=request.user)
 	except Saving.DoesNotExist:
 		saving = None
@@ -174,9 +153,14 @@ def create_saving(request):
 			return render(request, "create_saving.html", {'saving': saving, 'error': 'Por favor ingresa datos válidos'})
 
 @login_required
-def delete_saving(request):
+def delete_saving(request, used):
 	saving = get_object_or_404(Saving, user=request.user)
 
 	if request.method == 'POST':
+		if used == 1:
+			transaction = Transaction(category='GASTO', value=saving.goal,
+				description="Uso de ahorros", user=request.user)
+			transaction.save()
+
 		saving.delete()
 	return redirect('savings')

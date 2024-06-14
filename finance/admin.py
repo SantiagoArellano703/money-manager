@@ -6,4 +6,4 @@ class trans_admin(admin.ModelAdmin):
 
 # Register your models here.
 admin.site.register(Transaction, trans_admin)
-admin.site.register(Saving)
+admin.site.register(Saving, trans_admin)

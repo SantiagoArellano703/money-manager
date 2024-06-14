@@ -10,16 +10,12 @@
 
 		<div class="form">
 			<label for="goal">Meta</label>
-			<input type="number" step="0.01" 
-			{% if saving == None %} value="0.00" {% else %} value="{{saving.goal}}" {% endif %} 
-			min="0" pattern="^[0-9]+" name="goal" id="goal" required>
+			<input type="number" step="0.01"value="0.00" min="0" pattern="^[0-9]+" name="goal" id="goal" required>
 		</div>
 
 		<div class="form">
 			<label for="percentage">Porcentaje</label>
-			<input type="number" step="0.01" 
-			{% if saving == None %} value="0.00" {% else %} value="{{saving.percentage}}" {% endif %} 
-			min="0" max="100.00" pattern="^[0-9]+" name="percentage" id="percentage" required>
+			<input type="number" step="0.01" min="0" max="100.00" pattern="^[0-9]+" name="percentage" id="percentage" required>
 		</div>
 
 		<button>Guardar</button>
