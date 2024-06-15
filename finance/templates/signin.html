@@ -57,6 +57,10 @@
 						<h2>Bienvenido nuevamente</h2>
 					</div>
 
+					{% if error %}
+						<small class="mb-2">{{error}}</small>
+					{% endif %}
+
 					<form action="/signin/" method="POST">
 						{% csrf_token %}
 						<div class="input-group mb-3">

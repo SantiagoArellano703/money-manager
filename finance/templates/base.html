@@ -6,17 +6,58 @@
 	<title>Money Manager</title>
 	{% load static %}
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 <body>
 
-	<ul>
-
-		<li> <a href = "/dashboard">Dashboard</a> </li>
-		<li> <a href = "/transaction">Transacciones</a> </li>
-		<li> <a href = "/savings">Ahorro</a> </li>
-		<li> <a href = "/logout">Salir</a> </li>
-		
-	</ul>
+	<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary min-vh-100" style="width: 220px;">
+		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+			<i class="bx bxs-user bx-border-circle bi pe-none me-2"></i>
+			<span class="fs-4">{{user.username}}</span>
+		</a>
+		<hr>
+		<ul class="nav nav-pills flex-column mb-auto">
+			<li class="nav-item">
+				<a href="/dashboard"  
+				{% if request.path == '/dashboard/' %} 
+					class="nav-link active"
+				{% else %}
+ 					class="nav-link link-body-emphasis"
+				{% endif %} aria-current="page">
+					<i class="bx bxs-dashboard bi pe-none me-2"></i>
+					General
+				</a>
+			</li>
+			<li>
+				<a href="/transaction" 
+				{% if request.path == '/transaction/' %} 
+					class="nav-link active"
+				{% else %}
+ 					class="nav-link link-body-emphasis"
+				{% endif %}>
+					<i class="bx bx-transfer-alt bi pe-none me-2"></i>
+					Transacciones
+				</a>
+			</li>
+			<li>
+				<a href="/savings"
+				{% if request.path == '/savings/' %} 
+					class="nav-link active"
+				{% else %}
+ 					class="nav-link link-body-emphasis"
+				{% endif %}>
+					<i class="bx bxs-bank bi pe-none me-2"></i>
+					Ahorros
+				</a>
+			</li>
+		</ul>
+		<hr>
+		<a href="/logout" class="nav-link link-body-emphasis">
+			<i class="bx bx-log-out bi pe-none me-2"></i>
+			<strong>Salir</strong>
+		</a>
+	</div>
 
 	{% block content %}
 	{% endblock %}
