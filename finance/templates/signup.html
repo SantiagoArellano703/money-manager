@@ -1,10 +1,68 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Money Manager</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body class="bg-cover login">
+
+	<div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+		<div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+			<div class="col-md-6 form-box">
+				<div class="row align-items-center">
+					<div class="header-text mb-4">
+						<h2>Regístrate</h2>
+					</div>
+
+					{% if error %}
+						<small class="mb-2">{{error}}</small>
+					{% endif %}
+
+					<form action="/signup/" method="POST">
+						{% csrf_token %}
+						<div class="input-group mb-3">
+							<input type="text" name="username" id="username" class="form-control form-control-lg bg-light fs-6" required placeholder="Ingresa tu usuario">
+						</div>
+						<div class="input-group mb-3">
+							<input type="password" name="password1" id="password1" class="form-control form-control-lg bg-light fs-6" required placeholder="Ingresa tu contraseña">
+						</div>
+						<div class="input-group mb-1">
+							<input type="password" name="password2" id="password2" class="form-control form-control-lg bg-light fs-6" required placeholder="Confirma tu contraseña">
+						</div>
+						<div class="input-group mb-3 mt-5">
+							<button class="btn btn-lg btn-primary w-100 fs-6">Continuar</button>
+						</div>
+					</form>
+
+					<div class="row">
+						<small>¿Ya tienes una cuenta? <a href="/signin">Ingresar</a> </small>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column decoration-box">
+				<div class="featured-image mb-3">
+					<img src="{% static 'images/login.png' %}" class="img-fluid" alt="login" style="width: 250px;">
+				</div>
+				<p class="text-white fs-2">Comienza ya</p>
+				<small class="text-white text-wrap text-center">Controla tus finanzas de la mejor manera.</small>
+			</div>
+		</div>
+	</div>
+
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
 
 
-{% block content %}
-
-
-<form action="/signup/" method="POST">
+<!--<form action="/signup/" method="POST">
 	{% csrf_token %}
 
 	<h1>Crear cuenta</h1>
@@ -26,9 +84,8 @@
 		<input type="password" name="password2" id="password2" required placeholder="Ingresa tu contraseña nuevamente">
 	</div>
 
-	<button>Enviar</button>
+	<button>Enviar</button>-->
 </form>
 
-{% endblock %}
 
 

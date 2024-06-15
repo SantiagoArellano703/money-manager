@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+:root {
+	--background: #ececec;
+	--background-login-img: #103cbe;
+}
+
+/*-----------------------------------*\
+  HOME
+\*-----------------------------------*/
+
+nav {
+	z-index: 10;
+}
+
+.hero-section {
+	position: relative;
+	top: -80px;
+}
+
+.btn-animate {
+	transition: transform 0.3s;
+}
+
+.btn-animate:hover {
+	transform: scale(1.05);
+}
+
+/*-----------------------------------*\
+  LOGIN
+\*-----------------------------------*/
+
+.login, .signup {
+	font-family: 'Poppins', sans-serif;
+	background: var(--background);
+	top: -80px;
+}
+
+.box-area {
+	width: 930px;
+}
+
+.decoration-box {
+	background-color: var(--background-login-img);
+
+}
+
+.decoration-box p {
+	font-family: monospace;
+	font-weight: 700;
+}
+
+.decoration-box small {
+	width: 17rem;
+	font-family: monospace;
+}
+
+.form-box {
+	padding: 40px 30px 40px 40px;
+}
+
+/*.bg-glass {
+	background: rgba(255, 255, 255, 0.2);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+}*/
+
+/*-----------------------------------*\
+  MEDIA QUERYS
+\*-----------------------------------*/
+
+@media only screen and (max-width: 768px){
+	.box-area {
+		margin: 0 10px;
+	}
+
+	.decoration-box {
+		height: 100px;
+		overflow: hidden;
+	}
+
+	.form-box {
+		padding: 20px;
+	}
+}

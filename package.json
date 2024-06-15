@@ -1,0 +1,23 @@
+{
+  "name": "moneymanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SantiagoArellano703/money-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SantiagoArellano703/money-manager/issues"
+  },
+  "homepage": "https://github.com/SantiagoArellano703/money-manager#readme",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

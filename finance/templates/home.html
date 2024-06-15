@@ -1,6 +1,53 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Money Manager</title>
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg">
+		<div class="container">
+
+			<a class="navbar-brand" href="/">Navbar</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav ms-auto gap-2">
+					<li class="nav-item">
+					  <a class="btn btn-outline-primary btn-animate" href="/signin">Iniciar Sesión</a>
+					</li>
+					<li class="nav-item">
+					  <a class="btn btn-primary me-2 btn-animate" href="/signup">Crear cuenta</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container col-xxl-8 px-4 py-5 hero-section">
+		<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+			<div class="col-10 col-sm-8 col-lg-6">
+				<img src="{% static 'images/pig-home.png' %}" class="d-block mx-lg-auto img-fluid" alt="pig" width="400" loading="lazy">
+			</div>
+			<div class="col-lg-6">
+				<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Organiza tu dinero</h1>
+				<p class="lead">Controla tus finanzas de una manera más sencilla.</p>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-start">
+					<a class="btn btn-primary btn-lg px-4 me-md-2 btn-animate" href="/signin">¡Empezar ahora!</a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
-{% block content %}
-<h1>Home</h1>
-{% endblock %}
+	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+</body>
+</html>
