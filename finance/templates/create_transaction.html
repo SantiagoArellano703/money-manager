@@ -1,45 +1,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Nueva Transacción</h1>
 
-	{{error}}
-	
-	<form action='/transaction/create/', method="POST">
-		{% csrf_token %}
+	<div class="container d-flex justify-content-center align-items-center min-vh-100 login-section">
 
-		<div class="form-trans">
-			<p>Tipo</p>
-			
-			<input type="radio" name="category" id="income" value="INGRESO" required>
-			<label for="income">Ingreso</label>
-			<input type="radio" name="category" id="expense" value="GASTO" required>
-			<label for="expense">Gasto</label>
+		<div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+			<div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column decoration-box">
+				<div class="featured-image mb-3">
+					<img src="/static/images/formulario.png" class="img-fluid" alt="form" style="width: 250px;">
+				</div>
+				<p class="text-white fs-2">¡Organizate ya!</p>
+				<small class="text-white text-wrap text-center">Lleva un control de tus ingresos y gastos en cada momento.</small>
+			</div>
+
+			<div class="col-md-6 form-box">
+				<div class="row align-items-center">
+					<div class="header-text mb-4">
+						<h2>Crear transacción</h2>
+					</div>
+
+					{% if error %}
+						<small class="mb-2">{{error}}</small>
+					{% endif %}
+
+					<form action="/transaction/create/" method="POST">
+						{% csrf_token %}
+
+						<div class="mb-3">
+							<label for="category" class="form-label">Tipo de transacción</label>
+							<div class="d-flex flex-row column-gap-3 justify-content-center">
+								<input type="radio" class="btn-check" name="category" id="ingreso" value="INGRESO" checked required>
+								<label class="btn btn-outline-success" for="ingreso" style="width: 50%;">Ingreso</label>
+
+								<input type="radio" class="btn-check" name="category" id="gasto" value="GASTO">
+								<label class="btn btn-outline-danger" for="gasto" style="width: 50%;">Gasto</label>
+							</div>
+						</div>
+						<div class="mb-4">
+							<label for="value" lass="form-label">Monto</label>
+							<div class="input-group mt-1">
+							 	<span class="input-group-text">$</span>
+							    <input type="number" class="form-control" step="0.01" value="0.00" min="0" pattern="^[0-9]+" name="value" id="value" required>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<label for="payment_method" lass="form-label">Método de pago</label>
+							<div class="form-check mt-1">
+							    <input class="form-check-input" type="radio" name="payment_method" id="efectivo" value="EFECTIVO" checked required>
+							    <label class="form-check-label" for="efectivo">
+							      Efectivo
+							    </label>
+							</div>
+							<div class="form-check">
+							    <input class="form-check-input" type="radio" name="payment_method" id="banco" value="BANCO" required>
+							    <label class="form-check-label" for="banco">
+							      Cuenta de banco
+							    </label>
+							</div>
+							<div class="form-check">
+							    <input class="form-check-input" type="radio" name="payment_method" id="cripto" value="CRIPTO" required>
+							    <label class="form-check-label" for="cripto">
+							      Criptomonedas
+							    </label>
+							</div>
+						</div>	
+
+						<div class="mb-4">
+							<label for="value" class="form-label">Descripción</label>
+							<div class="input-group">
+							 	<textarea class="form-control" name="description" id="description" maxlength="100" placeholder="Comida, servicios..." required style="resize: none"></textarea>
+							</div>
+						</div>
+
+						<div class="input-group mb-3">
+							<button class="btn btn-lg btn-primary w-100 fs-6">Crear</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-
-		<div class="form-trans">
-			<label for="value">Monto</label>
-			<input type="number" step="0.01" value="0.00" min="0" pattern="^[0-9]+" name="value" id="value" required>
-		</div>
-
-		<div class="form-trans">
-			<p>Metodo de pago</p>
-			
-			<input type="radio" name="payment_method" id="efectivo" value="EFECTIVO" required>
-			<label for="efectivo">Efectivo</label>
-			<input type="radio" name="payment_method" id="banco" value="BANCO" required>
-			<label for="banco">Cuenta Bancaria</label>
-			<input type="radio" name="payment_method" id="cripto" value="CRIPTO" required>
-			<label for="cripto">Criptomoneda</label>
-		</div>
-
-		<div class="form-trans">
-			<label for="description">Descripción</label>
-			<textarea name="description" id="description" maxlength="100" required></textarea>
-		</div>
-
-		<button>Guardar</button>
-	</form>
-
+	</div>
 
 {% endblock %}
