@@ -12,6 +12,8 @@ from .utils.services import *
 
 # Inicio
 def home(request):
+	if request.user.is_authenticated:
+		return redirect('dashboard')
 	return render(request, "home.html")
 
 # Registro y login

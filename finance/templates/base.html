@@ -11,56 +11,71 @@
 </head>
 <body>
 
-	<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary min-vh-100" style="width: 220px;">
-		<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-			<i class="bx bxs-user bx-border-circle bi pe-none me-2"></i>
-			<span class="fs-4">{{user.username}}</span>
-		</a>
-		<hr>
-		<ul class="nav nav-pills flex-column mb-auto">
-			<li class="nav-item">
-				<a href="/dashboard"  
-				{% if request.path == '/dashboard/' %} 
-					class="nav-link active"
-				{% else %}
- 					class="nav-link link-body-emphasis"
-				{% endif %} aria-current="page">
-					<i class="bx bxs-dashboard bi pe-none me-2"></i>
-					General
-				</a>
-			</li>
-			<li>
-				<a href="/transaction" 
-				{% if request.path == '/transaction/' %} 
-					class="nav-link active"
-				{% else %}
- 					class="nav-link link-body-emphasis"
-				{% endif %}>
-					<i class="bx bx-transfer-alt bi pe-none me-2"></i>
-					Transacciones
-				</a>
-			</li>
-			<li>
-				<a href="/savings"
-				{% if request.path == '/savings/' %} 
-					class="nav-link active"
-				{% else %}
- 					class="nav-link link-body-emphasis"
-				{% endif %}>
-					<i class="bx bxs-bank bi pe-none me-2"></i>
-					Ahorros
-				</a>
-			</li>
-		</ul>
-		<hr>
-		<a href="/logout" class="nav-link link-body-emphasis">
-			<i class="bx bx-log-out bi pe-none me-2"></i>
-			<strong>Salir</strong>
-		</a>
-	</div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-auto min-vh-100 bg-body-tertiary sidebar">
+				<div class="pt-4 pb-1 px-2">
+					<i class="bx bx-menu bx-border-circle bi pe-none me-2 text-primary"></i>
+					<span class="fs-4 d-none d-sm-inline">Menú</span>
+				</div>
+				<hr>
 
-	{% block content %}
-	{% endblock %}
+				<ul class="nav nav-pills flex-column mb-auto">
+
+					<li class="nav-item">
+						{% if request.path == '/dashboard/' %}
+							<a href="/dashboard" class="nav-link active">
+								<i class="bx bxs-dashboard me-sm-2 text-white"></i>
+								<span class="d-none d-sm-inline text-white">General</span>
+							</a>
+						{% else %}
+							<a href="/dashboard" class="nav-link">
+								<i class="bx bxs-dashboard bi pe-none me-2 text-primary"></i>
+								<span class="d-none d-sm-inline text-black">General</span>
+							</a>
+						{% endif %}
+					</li>
+					<li class="nav-item">
+						{% if request.path == '/transaction/' %}
+							<a href="/transaction" class="nav-link active">
+								<i class="bx bx-transfer-alt me-2 text-white"></i>
+								<span class="d-none d-sm-inline text-white">Transacciones</span>
+							</a>
+						{% else %}
+							<a href="/transaction" class="nav-link">
+								<i class="bx bx-transfer-alt me-2 text-primary"></i>
+								<span class="d-none d-sm-inline text-black">Transacciones</span>
+							</a>
+						{% endif %}
+					</li>
+					<li class="nav-item">
+						{% if request.path == '/savings/' %}
+							<a href="/savings" class="nav-link active">
+								<i class="bx bxs-bank me-2 text-white"></i>
+								<span class="d-none d-sm-inline text-white">Ahorros</span>
+							</a>
+						{% else %}
+							<a href="/savings" class="nav-link">
+								<i class="bx bxs-bank me-2 text-primary"></i>
+								<span class="d-none d-sm-inline text-black">Ahorros</span>
+							</a>
+						{% endif %}
+					</li>
+					<li class="nav-item">
+						<a href="/logout" class="nav-link">
+							<i class="bx bx-log-out bi pe-none me-2 text-primary"></i>
+							<span class="d-none d-sm-inline text-black">Salir</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="col min-vh-100 content">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</div>
+	</div>
 
 	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
