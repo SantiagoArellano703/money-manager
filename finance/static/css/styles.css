@@ -137,7 +137,7 @@ nav {
 	border-radius: 20px;
 }
 
-.card-box .card-new .numbers {
+.card-box .card-new .numbers, .card-box-col .card-new .numbers{
 	position: relative;
 	font-weight: 500;
 	font-size: 2.5rem;
@@ -234,6 +234,7 @@ nav {
 	padding: 30px;
 	display: flex;
 	align-items: center;
+	justify-content: space-between;
 	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
 	border-radius: 20px;
 }
@@ -303,6 +304,10 @@ nav {
 .card-section table tbody td .action{
 	cursor: pointer;
 }
+
+/*-----------------------------------*\
+  SAVINGS
+\*-----------------------------------*/
 
 
 /*-----------------------------------*\

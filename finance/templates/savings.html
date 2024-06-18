@@ -3,39 +3,104 @@
 {% block content %}
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<h1>Ahorros</h1>
+	<div class="container d-flex justify-content-center align-items-center min-vh-100 login-section">
 
-	{% if saving == None %}
-		<p>No tienes ahorros aún</p>
+		<div class="row border rounded-5 p-3 bg-white shadow box-area">
 
-		<form action="{% url 'create_saving' %}" method="GET">
-			{% csrf_token %}
-			<button>Crear</button>	
-		</form>
+			<div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column decoration-box">
+				<div class="featured-image mb-3" style="width: 250px">
+					{% if saving == None %}
+						<img src="/static/images/pig-home.png" class="img-fluid" alt="login" style="width: 250px;">
+					{% else %}
+						<canvas id="myChart"></canvas>
+					{% endif %}
+				</div>
+				<p class="text-white fs-2">¡Continúa así!</p>
+				<small class="text-white text-wrap text-center">Pequeños ahorros constantes son la base de una gran fortuna.</small>
+			</div>
 
-	{% else %}
-		<p>{{saving.current_value}}</p>
-		<p>{{saving.goal}}</p>
+			<div class="col-md-6 form-box">
+				<div class="row align-items-center">
+					<div class="header-text mb-1">
+						<h2>Ahorro</h2>
+					</div>
 
-		{% if saving.current_value == saving.goal %}
-			<p>Felicitaciones, alcanzaste la meta de ahorro</p>
+					{% if saving == None %}
+						<span class="mb-2" style="font-size: 1.1rem">No tienes ahorros aún</span>
 
-			<form action="{% url 'delete_saving' 1 %}" method="POST">
-				{% csrf_token %}
-				<button>Utilizar</button>	
-			</form>
-		{% endif %}
+						<p style="font-size: 1.1rem">
+							Comienza un plan de ahorros, así alcanzarás tus metas financieras de una forma más sencilla. Elige la meta a la que quieres llegar y el porcentaje de tus ingresos que deseas invertir. ¡Comienza ya!
+						</p>
 
-		<form action="{% url 'delete_saving' 0 %}" method="POST">
-			{% csrf_token %}
-			<button>Eliminar</button>	
-		</form>
-	{% endif %}
+						<form action="{% url 'create_saving' %}" method="GET">
+							{% csrf_token %}
+							<div class="input-group mt-3">
+								<button class="btn btn-lg btn-primary w-100 fs-6">Crear</button>
+							</div>
+						</form>
+					{% else %}
+						
+						<div class="card-box-col">
+							<div class="card-new">
+								<div>
+									<div class="numbers">{{saving.current_value}}</div>
+									<div class="card-name">Ahorrado</div>
+								</div>
 
-	<div style="width: 300px">
-		<canvas id="myChart"></canvas>
+								<div class="icon-bx">
+									<i class="bx bxs-bank"></i>
+								</div>
+							</div>
+
+							<div class="card-new">
+								<div>
+									<div class="numbers">{{saving.goal}}</div>
+									<div class="card-name">Meta</div>
+								</div>
+
+								<div class="icon-bx">
+									<i class="bx bx-trending-up"></i>
+								</div>
+							</div>
+
+							{% if saving.current_value != saving.goal %}
+								<div class="card-new">
+									<div>
+										<div class="numbers">{{saving.percentage}}</div>
+										<div class="card-name">Porcentaje</div>
+									</div>
+
+									<div class="icon-bx">
+										<i class="bx bx-doughnut-chart"></i>
+									</div>
+								</div>
+
+							{% endif %}	
+						</div>
+
+						{% if saving.current_value == saving.goal %}
+							<span class="mb-2 mt-1" style="font-size: 1.1rem">Felicitaciones, alcanzaste la meta de ahorro</span>
+
+							<form action="{% url 'delete_saving' 1 %}" method="POST">
+								{% csrf_token %}
+								<div class="input-group mt-3">
+									<button class="btn btn-lg btn-primary w-100 fs-6">Usar</button>
+								</div>
+							</form>
+						{% endif %}
+
+						<form action="{% url 'delete_saving' 0 %}" method="POST">
+							{% csrf_token %}
+							<div class="input-group mt-3">
+								<button class="btn btn-lg btn-danger w-100 fs-6">Eliminar</button>
+							</div>
+						</form>
+
+					{% endif %}
+				</div>
+			</div>
+		</div>
 	</div>
-
 
 	<script>
 		const ctx = document.getElementById('myChart');
@@ -49,9 +114,19 @@
 				labels: ['Progreso', 'Faltante'],
 				datasets: [{
 					data: [percentage_completed, remaining],
-					backgroundColor: ['rgb(25, 135, 84)','rgba(13, 110, 253, 1)'],
-
+					backgroundColor: ['rgba(13, 110, 253, 1)', 'rgba(255, 255, 255, 1)'],
+					borderWidth: 1,
+					borderColor: ['rgb(255, 255, 255)']
 				}]
+			},
+			options: {
+				plugins: {
+					legend: {
+					  	labels: {
+					  		color: ['rgb(255, 255, 255)']
+					  	}
+					}
+				}
 			}
 			
 		});
