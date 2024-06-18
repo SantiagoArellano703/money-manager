@@ -54,11 +54,11 @@ def signin(request):
 def dashboard(request):
 	transactions = Transaction.objects.filter(user = request.user)
 
-	(total, avaible, incomes, expenses, saving_current) = get_data(request)
+	(total, avaible, incomes, expenses, saving_current, graphic_values) = get_data(request)
 
 	return render(request, 'dashboard.html', {
 		'total': total, 'incomes': incomes, 'expenses': expenses,
-		'avaible': avaible, 'saving_current': saving_current})
+		'avaible': avaible, 'saving_current': saving_current, 'graphic_values': graphic_values})
 
 @login_required
 def transaction(request):

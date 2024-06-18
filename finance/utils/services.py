@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 def get_data(request):
 	transactions = Transaction.objects.filter(user = request.user)
+	graphic_values = []
 
 	incomes = expenses = 0
 	for trans in transactions:
@@ -11,6 +12,8 @@ def get_data(request):
 			incomes += trans.value
 		else:
 			expenses += trans.value  
+
+		graphic_values.append(float(incomes-expenses))
 
 	total = incomes - expenses
 
@@ -38,5 +41,4 @@ def get_data(request):
 	
 	avaible = total - saving_current
 
-	return (total, avaible, incomes, expenses, saving_current)
-	
+	return (total, avaible, incomes, expenses, saving_current, graphic_values)
