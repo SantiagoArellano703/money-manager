@@ -1,12 +1,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
 
 :root {
 	--background: rgb(236, 236, 236);
 	--blue: rgb(16, 59.993, 190);
+	--blue-primary: rgb(13, 110, 253);
 	--white: rgb(255, 255, 255);
 	--gray: rgb(245, 245, 245);
 	--black: rgb(34, 34, 34);
 	--gray2: rgb(153, 153, 153);
+	--red: rgb(220, 53, 69);
+	--green: rgb(25, 135, 84);
+}
+
+/*-----------------------------------*\
+  GENERAL
+\*-----------------------------------*/
+
+body {
+	font-family: 'Poppins', sans-serif;
 }
 
 /*-----------------------------------*\
@@ -30,7 +42,6 @@ nav {
 \*-----------------------------------*/
 
 .login, .signup {
-	font-family: 'Poppins', sans-serif;
 	background: var(--background);
 	top: -80px;
 }
@@ -68,17 +79,173 @@ nav {
 
 .content {
 	background-color: var(--background);
-	margin-left: 195px;
+	margin-left: 190px;
+	width: calc(100%  - 190px);
 }
 
 /*-----------------------------------*\
-  CREATE SAVINGS
+  DASHBOARD
 \*-----------------------------------*/
 
+.main {
+	min-width: 100%;
+	min-height: 100vh;
+	overflow-x: hidden;
+	/*background-color: var(--white);*/
+	transition: 0.5s;
+}
+
+.main h1 {
+	position: relative;
+	color: var(--black);
+	padding: 20px 20px 0 20px;
+}
+
+.card-box {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 30px;
+}
+
+.card-box .card-new {
+	position: relative;
+	background-color: var(--white);
+	padding: 30px;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
+
+.card-box .card-new .numbers {
+	position: relative;
+	font-weight: 500;
+	font-size: 2.5rem;
+	color: var(--blue-primary);
+}
+
+.card-box .card-new .card-name, .card-box-col .card-new .card-name {
+	color: var(--black);
+	font-size: 1.1rem;
+	margin-top: 5px;
+}
+
+.card-box .card-new .icon-bx, .card-box-col .card-new .icon-bx {
+	font-size: 3.5rem;
+	color: var(--gray2);
+}
+
+.card-box .card-new:hover {
+	background-color: var(--blue-primary);
+}
+
+.card-box .card-new:hover .numbers,
+.card-box .card-new:hover .card-name,
+.card-box .card-new:hover .icon-bx {
+	color: var(--white);
+}
+
+.details {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	grid-gap: 30px;
+}
+
+.details .transactions {
+	position: relative;
+	padding: 20px;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+	background-color: var(--white);
+}
+
+.details .transactions .card-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+.card-header h2 {
+	font-weight: 500;
+	color: var(--blue-primary);
+} 
+
+.card-header .btn-new {
+	position: relative;
+	text-decoration: none;
+	padding: 5px 10px;
+	background-color: var(--blue-primary);
+	color: var(--white);
+	border-radius: 6px;
+}
+
+.details .graphic {
+	width: 100%;
+	min-height: 400px;
+	display: flex;
+	align-items: center;
+}
+
+.details .diference {
+	background-color: var(--white);
+	position: relative;
+	padding: 20px;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
+
+.card-box-col {
+	position: relative;
+	width: 100%;
+	padding: 20px;
+	display: grid;
+	grid-template-rows: repeat(2, 1fr);
+	grid-gap: 30px;
+}
+
+.card-box-col .card-new {
+	position: relative;
+	background-color: var(--white);
+	padding: 30px;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+}
+
+.card-box-col .card-new .incomes, .card-box-col .card-new .expenses {
+	position: relative;
+	font-weight: 500;
+	font-size: 2.5rem;
+}
+
+.card-box-col .card-new .incomes{
+	color: var(--green);
+}
+
+.card-box-col .card-new .expenses{
+	color: var(--red);
+}
 
 /*-----------------------------------*\
   MEDIA QUERYS
 \*-----------------------------------*/
+
+@media only screen and (max-width: 991px){
+	.card-box {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.details {
+		grid-template-columns: 1fr;
+	}
+}
 
 @media only screen and (max-width: 768px){
 
@@ -95,11 +262,16 @@ nav {
 	.form-box {
 		padding: 20px;
 	}
+
+	.card-box {
+		grid-template-columns: 1fr;
+	}
 }
 
 @media only screen and (max-width: 575px){
 	/*Sidebar and content*/
 	.content {
-		margin-left: 80px;
+		margin-left: 70px;
+		width: calc(100%  - 70px);
 	}
 }

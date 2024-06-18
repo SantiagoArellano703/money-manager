@@ -2,31 +2,100 @@
 
 
 {% block content %}
-	
-	<div class="container-body">
-		
-		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-		<h1>Dashboard</h1>
+	<div class="container-fluid main">
 
-		<h1>Total</h1>
-		<p>{{total}}</p>
+		<h1>General</h1>
 
-		<h1>Disponible</h1>
-		<p>{{avaible}}</p>
+		<!-- CARDS -->
+		<div class="card-box">
 
-		<h1>Ahorrado</h1>
-		<p>{{saving_current}}</p>
+			<div class="card-new">
+				<div>
+					<div class="numbers">{{total}}</div>
+					<div class="card-name">Total</div>
+				</div>
 
-		<h1>Ingresos</h1>
+				<div class="icon-bx">
+					<i class="bx bx-dollar-circle"></i>
+				</div>
+			</div>
+			
+			<div class="card-new">
+				<div>
+					<div class="numbers">{{avaible}}</div>
+					<div class="card-name">Disponible</div>
+				</div>
+
+				<div class="icon-bx">
+					<i class="bx bx-dollar"></i>
+				</div>
+			</div>
+
+			<div class="card-new">
+				<div>
+					<div class="numbers">{{saving_current}}</div>
+					<div class="card-name">Ahorrado</div>
+				</div>
+
+				<div class="icon-bx">
+					<i class="bx bxs-bank"></i>
+				</div>
+			</div>
+
+		</div>
+
+		<!-- Graphic -->
+
+		<div class="details">
+			<div class="transactions">
+				<div class="card-header">
+					<h2>Transacciones</h2>
+					<a href="/transaction" class="btn-new">Ver todas</a>
+				</div>
+				<div class="graphic">
+		 			<canvas id="myChart"></canvas>
+				</div>
+			</div>
+
+			<div class="diference">
+				<div class="card-header">
+					<h2>Ingresos y Gastos</h2>
+				</div>
+
+				<div class="card-box-col">
+					<div class="card-new">
+						<div>
+							<div class="numbers incomes">{{incomes}}</div>
+							<div class="card-name">Ingresos</div>
+						</div>
+
+						<div class="icon-bx">
+							<i class="bx bx-up-arrow-circle"></i>
+						</div>
+					</div>
+
+					<div class="card-new">
+						<div>
+							<div class="numbers expenses">{{expenses}}</div>
+							<div class="card-name">Gastos</div>
+						</div>
+
+						<div class="icon-bx">
+							<i class="bx bx-down-arrow-circle"></i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!--<h1>Ingresos</h1>
 		<p>{{incomes}}</p>
 
 		<h1>Gastos</h1>
-		<p>{{expenses}}</p>
-
-		<div>
-		  <canvas id="myChart"></canvas>
-		</div>
+		<p>{{expenses}}</p>-->
 
 	</div>
 
@@ -36,30 +105,30 @@
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	<script>
-	  const ctx = document.getElementById('myChart');
-	  let y = {{graphic_values}};
-	  let x = Array.from({length: y.length}, (_, i) => i);
+		const ctx = document.getElementById('myChart');
+		let y = {{graphic_values}};
+		let x = Array.from({length: y.length}, (_, i) => i);
 
-	  new Chart(ctx, {
-	    type: 'line',
-	    data: {
-	      labels: x,
-	      datasets: [{
-	        label: 'Dinero',
-	        data: y,
-	        borderColor: 'rgba(255, 99, 132, 1)',
-	        backgroundColor: 'rgba(255, 99, 132, 1)',
-	        borderWidth: 1
-	      }]
-	    },
-	    options: {
-	      scales: {
-	        y: {
-	          beginAtZero: true
-	        }
-	      }
-	    }
-	  });
+		new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: x,
+				datasets: [{
+					label: 'Dinero',
+					data: y,
+					borderColor: 'rgb(16, 59.993, 190)',
+					backgroundColor: 'rgba(13, 110, 253, 1)',
+					borderWidth: 1
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+					  beginAtZero: true
+					}
+				}
+			}
+		});
 	</script>
 
 {% endblock %}
