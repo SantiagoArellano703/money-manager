@@ -14,11 +14,31 @@
 }
 
 /*-----------------------------------*\
-  GENERAL
+  REUSED STYLES
 \*-----------------------------------*/
 
 body {
 	font-family: 'Poppins', sans-serif;
+}
+
+.main {
+	min-width: 100%;
+	min-height: 100vh;
+	overflow-x: hidden;
+	transition: 0.5s;
+}
+
+.main h1 {
+	position: relative;
+	color: var(--black);
+	padding: 20px 20px 0 20px;
+}
+
+.btn-inline {
+	display: inline-flex;
+	padding: 0;
+	margin: 0;
+	border: none;
 }
 
 /*-----------------------------------*\
@@ -34,6 +54,14 @@ nav {
 }
 
 .btn-animate:hover {
+	transform: scale(1.05);
+}
+
+.btn-animate-2 {
+	transition: transform 0.1s;
+}
+
+.btn-animate-2:hover {
 	transform: scale(1.05);
 }
 
@@ -73,12 +101,15 @@ nav {
   SIDEBAR Y CONTENT
 \*-----------------------------------*/
 
+.base-main {
+	background-color: var(--background);
+}
+
 .sidebar {
 	position: fixed;
 }
 
 .content {
-	background-color: var(--background);
 	margin-left: 190px;
 	width: calc(100%  - 190px);
 }
@@ -86,20 +117,6 @@ nav {
 /*-----------------------------------*\
   DASHBOARD
 \*-----------------------------------*/
-
-.main {
-	min-width: 100%;
-	min-height: 100vh;
-	overflow-x: hidden;
-	/*background-color: var(--white);*/
-	transition: 0.5s;
-}
-
-.main h1 {
-	position: relative;
-	color: var(--black);
-	padding: 20px 20px 0 20px;
-}
 
 .card-box {
 	position: relative;
@@ -139,12 +156,14 @@ nav {
 }
 
 .card-box .card-new:hover {
+	transition: 0.3s;
 	background-color: var(--blue-primary);
 }
 
 .card-box .card-new:hover .numbers,
 .card-box .card-new:hover .card-name,
 .card-box .card-new:hover .icon-bx {
+	transition: 0.3s;
 	color: var(--white);
 }
 
@@ -234,6 +253,59 @@ nav {
 }
 
 /*-----------------------------------*\
+  TRANSACTIONS
+\*-----------------------------------*/
+.topbar {
+	position: relative;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	justify-items: space-between;
+	align-items: center;
+}
+
+.topbar .filter-form {
+	padding: 20px 20px 0 20px;
+}
+
+.card-section {
+	position: relative;
+	width: 100%;
+	background-color: var(--white);
+	padding: 20px;
+	box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+	max-width: 930px;
+	margin: 10px auto;
+}
+.card-section .card-header {
+	padding-inline: 5px;
+}
+
+.card-section .card-header i {
+	color: var(--gray2);
+}
+
+.card-section table {
+	width: 100%;
+	border-collapse: collapse;
+	margin-top: 10px;
+}
+
+.card-section table thead td {
+	font-weight: 600;
+}
+
+.card-section table tr {
+	color: var(--black);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.card-section table tbody td .action{
+	cursor: pointer;
+}
+
+
+/*-----------------------------------*\
   MEDIA QUERYS
 \*-----------------------------------*/
 
@@ -265,6 +337,17 @@ nav {
 
 	.card-box {
 		grid-template-columns: 1fr;
+	}
+
+	.main .topbar {
+		grid-template-columns: 1fr;
+		justify-items: start;
+		margin-bottom: 30px;
+	}
+
+	.topbar .filter-form {
+		margin-top: -10px;
+		justify-content: start;
 	}
 }
 

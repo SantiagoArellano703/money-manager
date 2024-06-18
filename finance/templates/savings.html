@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 	<h1>Ahorros</h1>
 
@@ -30,6 +31,31 @@
 			<button>Eliminar</button>	
 		</form>
 	{% endif %}
+
+	<div style="width: 300px">
+		<canvas id="myChart"></canvas>
+	</div>
+
+
+	<script>
+		const ctx = document.getElementById('myChart');
+		let percentage_completed = ({{saving.current_value}} / {{saving.goal}})*100;
+		let remaining = 100 - percentage_completed;
+		console.log(percentage_completed)
+
+		new Chart(ctx, {
+			type: 'doughnut',
+			data: {
+				labels: ['Progreso', 'Faltante'],
+				datasets: [{
+					data: [percentage_completed, remaining],
+					backgroundColor: ['rgb(25, 135, 84)','rgba(13, 110, 253, 1)'],
+
+				}]
+			}
+			
+		});
+	</script>
 
 	
 {% endblock %}

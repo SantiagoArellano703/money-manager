@@ -30,7 +30,7 @@
 						<div class="mb-3">
 							<label for="category" class="form-label">Tipo de transacción</label>
 							<div class="d-flex flex-row column-gap-3 justify-content-center">
-								<input type="radio" class="btn-check" name="category" id="ingreso" value="INGRESO" checked required>
+								<input type="radio" class="btn-check" name="category" id="ingreso" value="INGRESO" checked>
 								<label class="btn btn-outline-success" for="ingreso" style="width: 50%;">Ingreso</label>
 
 								<input type="radio" class="btn-check" name="category" id="gasto" value="GASTO">
@@ -48,19 +48,19 @@
 						<div class="mb-3">
 							<label for="payment_method" lass="form-label">Método de pago</label>
 							<div class="form-check mt-1">
-							    <input class="form-check-input" type="radio" name="payment_method" id="efectivo" value="EFECTIVO" checked required>
+							    <input class="form-check-input" type="radio" name="payment_method" id="efectivo" value="EFECTIVO" checked>
 							    <label class="form-check-label" for="efectivo">
 							      Efectivo
 							    </label>
 							</div>
 							<div class="form-check">
-							    <input class="form-check-input" type="radio" name="payment_method" id="banco" value="BANCO" required>
+							    <input class="form-check-input" type="radio" name="payment_method" id="banco" value="BANCO">
 							    <label class="form-check-label" for="banco">
 							      Cuenta de banco
 							    </label>
 							</div>
 							<div class="form-check">
-							    <input class="form-check-input" type="radio" name="payment_method" id="cripto" value="CRIPTO" required>
+							    <input class="form-check-input" type="radio" name="payment_method" id="cripto" value="CRIPTO">
 							    <label class="form-check-label" for="cripto">
 							      Criptomonedas
 							    </label>
@@ -68,7 +68,7 @@
 						</div>	
 
 						<div class="mb-4">
-							<label for="value" class="form-label">Descripción</label>
+							<label for="description" class="form-label">Descripción</label>
 							<div class="input-group">
 							 	<textarea class="form-control" name="description" id="description" maxlength="100" placeholder="Comida, servicios..." required style="resize: none"></textarea>
 							</div>

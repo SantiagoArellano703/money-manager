@@ -4,45 +4,51 @@
 {% block content %}
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-	<div class="container-fluid main">
+	<div class="container-fluid main-dashboard">
 
 		<h1>General</h1>
 
 		<!-- CARDS -->
 		<div class="card-box">
 
-			<div class="card-new">
-				<div>
-					<div class="numbers">{{total}}</div>
-					<div class="card-name">Total</div>
-				</div>
+			<a href="/transaction" style="text-decoration: none;">
+				<div class="card-new">
+					<div>
+						<div class="numbers">{{total}}</div>
+						<div class="card-name">Total</div>
+					</div>
 
-				<div class="icon-bx">
-					<i class="bx bx-dollar-circle"></i>
+					<div class="icon-bx">
+						<i class="bx bx-dollar-circle"></i>
+					</div>
 				</div>
-			</div>
+			</a>
 			
-			<div class="card-new">
-				<div>
-					<div class="numbers">{{avaible}}</div>
-					<div class="card-name">Disponible</div>
-				</div>
+			<a href="/transaction" style="text-decoration: none;">
+				<div class="card-new">
+					<div>
+						<div class="numbers">{{avaible}}</div>
+						<div class="card-name">Disponible</div>
+					</div>
 
-				<div class="icon-bx">
-					<i class="bx bx-dollar"></i>
+					<div class="icon-bx">
+						<i class="bx bx-dollar"></i>
+					</div>
 				</div>
-			</div>
+			</a>
 
-			<div class="card-new">
-				<div>
-					<div class="numbers">{{saving_current}}</div>
-					<div class="card-name">Ahorrado</div>
-				</div>
+			<a href="/savings" style="text-decoration: none;">
+				<div class="card-new">
+					<div>
+						<div class="numbers">{{saving_current}}</div>
+						<div class="card-name">Ahorrado</div>
+					</div>
 
-				<div class="icon-bx">
-					<i class="bx bxs-bank"></i>
+					<div class="icon-bx">
+						<i class="bx bxs-bank"></i>
+					</div>
 				</div>
-			</div>
+			</a>
 
 		</div>
 
@@ -52,7 +58,7 @@
 			<div class="transactions">
 				<div class="card-header">
 					<h2>Transacciones</h2>
-					<a href="/transaction" class="btn-new">Ver todas</a>
+					<a href="/transaction" class="btn-new btn-animate">Detalles</a>
 				</div>
 				<div class="graphic">
 		 			<canvas id="myChart"></canvas>
@@ -90,20 +96,10 @@
 			</div>
 		</div>
 
-
-		<!--<h1>Ingresos</h1>
-		<p>{{incomes}}</p>
-
-		<h1>Gastos</h1>
-		<p>{{expenses}}</p>-->
-
 	</div>
 
 
 	<!-- Script for graphic -->
-
-	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 	<script>
 		const ctx = document.getElementById('myChart');
 		let y = {{graphic_values}};

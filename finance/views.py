@@ -80,7 +80,7 @@ def create_transaction(request):
 		return render(request, "create_transaction.html")
 	else:
 		try:
-			(total, avaible, incomes, expenses, saving_current) = get_data(request)
+			(total, avaible, incomes, expenses, saving_current, graphic_values) = get_data(request)
 
 			if request.POST['category'] == 'GASTO' and int(request.POST['value']) > int(avaible):
 				return render(request, "create_transaction.html", {'error': 'El saldo disponible es insuficiente.'})
@@ -111,9 +111,7 @@ def transaction_details(request, id_transaction):
 @login_required
 def delete_transaction(request, id_transaction):
 	trans = get_object_or_404(Transaction, pk=id_transaction, user=request.user)
-
-	if request.method == 'POST':
-		trans.delete()
+	trans.delete()
 	return redirect('transaction')
 
 # Ahorros

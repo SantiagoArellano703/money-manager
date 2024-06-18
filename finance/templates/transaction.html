@@ -1,44 +1,83 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<h1>Transacciones</h1>
+	<div class="main">
+		<div class="topbar">
+			<h1>Transacciones</h1>
 
-	<form action="/transaction/" method="GET">
-		<label>
-			<input type="radio" name="filter" value="INGRESO" 
-				{% if 'INGRESO' in category %} checked {% endif %}> Ingresos
-		</label>
+			<div class="filter-form">
+				<form action="/transaction/" method="GET">
+					<div class="d-flex flex-row column-gap-3 justify-content-center">
+						<button class="btn-inline">
+							<input type="radio" class="btn-check" name="filter" id="ingreso" value="INGRESO" {% if 'INGRESO' in category %} checked {% endif %}>
+							<label class="btn btn-sm btn-outline-success" for="ingreso">Ingresos</label>
+						</button>
 
-		<label>
-			<input type="radio" name="filter" value="GASTO"
-				{% if 'GASTO' in category %} checked {% endif %}> Gastos
-		</label>
-		
-		<label>
-			<input type="radio" name="filter" value="AMBOS"
-				{% if 'AMBOS' in category %} checked {% endif %}> Ambos
-		</label>
+						<button class="btn-inline">
+							<input type="radio" class="btn-check" name="filter" id="gasto" value="GASTO" {% if 'GASTO' in category %} checked {% endif %}>
+							<label class="btn btn-sm btn-outline-danger" for="gasto">Gastos</label>
+						</button>
+
+						<button class="btn-inline">
+							<input type="radio" class="btn-check" name="filter" id="ambos" value="AMBOS" {% if 'AMBOS' in category %} checked {% endif %}>
+							<label class="btn btn-sm btn-outline-primary" for="ambos">Ambos</label>
+						</button>
+					</div>
+				</form>
+			</div>
 			
-		<button>Filtrar</button>	
-	</form>
+		</div>
 
-	<ul>
-		{% for transaction in transactions %}
-			<li>
-				<a href="{% url 'transaction_details' transaction.id %}">
-					{% if transaction.category == 'INGRESO' %}
-						<p> + </p>
-					{% else %}
-						<p> - </p>
-					{% endif %}
-
-					<p> {{transaction.description}} </p>			
-					<p> {{transaction.value}} </p>	
+		<div class="card-section">
+			<div class="card-header d-flex flex-row justify-content-between align-items-center">
+				<h2>Movimientos</h2>
+				<a href = "/transaction/create" style="text-decoration: none" class="btn-animate">
+					<i class="bx bxs-plus-circle fs-3" style="color: var(--blue-primary)"></i>
 				</a>
-			</li>	
-		{% endfor %}
-	</ul>
+				
+			</div>
 
-	<a href = "/transaction/create">Añadir</a>
+			<table>
+				<thead>
+					<tr>
+						<td>Fecha</td>
+						<td>Descripción</td>
+						<td>Valor</td>
+						<td>Tipo</td>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for transaction in transactions %}
+							
+						<tr>
+							<td>{{transaction.date|date:'j M Y'}}</td>
+							<td>{{transaction.description}}</td>
+							<td>{{transaction.value}}</td>
+							<td>
+								{% if transaction.category == 'INGRESO' %}
+									<i class="bx bx-up-arrow-circle"  style="color: var(--green); font-size: 20px"></i>
+								{% else %}
+									<i class="bx bx-down-arrow-circle"  style="color: var(--red); font-size: 20px"></i>
+								{% endif %}
+							</td>
+							<td>
+								<a href="{% url 'transaction_details' transaction.id %}" style="text-decoration: none">
+									<i class="bx bx-pencil action btn-animate-2" style="color: var(--blue-primary); font-size: 20px"></i>
+								</a>
+
+								<a href="{% url 'delete_transaction' transaction.id %}" style="text-decoration: none">
+									<i class="bx bx-trash action btn-animate-2"  style="color: var(--red); font-size: 20px"></i>
+								</a>
+							</td>
+						</tr>
+						
+					{% endfor %}
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
 
 {% endblock %}
