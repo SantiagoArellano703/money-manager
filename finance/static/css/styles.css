@@ -64,10 +64,6 @@ nav {
 	min-height: 100vh;
 }
 
-/*.main-body {
-	background-color: rgba(135.47, 206.24, 247.03, 0.8);
-}*/
-
 .btn-animate {
 	transition: transform 0.3s;
 }
@@ -86,6 +82,10 @@ nav {
 
 .btn-animate-2:hover {
 	transform: scale(1.05);
+}
+
+.icons-home {
+	padding-inline: 50px;
 }
 
 /*-----------------------------------*\
@@ -415,5 +415,8 @@ nav {
 		overflow: auto;
 	}
 
+	.icons-home {
+		padding-inline: 0px;
+	}
 
 }
