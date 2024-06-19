@@ -8,12 +8,14 @@
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
+<body class="home-body">
 
-	<nav class="navbar navbar-expand-lg">
+	<nav class="navbar navbar-expand-md mt-md-4">
 		<div class="container">
-
-			<a class="navbar-brand text-primary" href="/">Navbar</a>
+			<div class="d-flex flex-row align-items-center justify-items-center">
+				<img src="/static/images/logo.png" alt="logo" width="50px">
+			</div>
+			
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -21,31 +23,30 @@
 			<div class="collapse navbar-collapse" id="navbarNav">
 				<ul class="navbar-nav ms-auto gap-2">
 					<li class="nav-item">
-					  <a class="btn btn-outline-primary btn-animate" href="/signin">Iniciar Sesión</a>
+					  <a class="btn btn-outline-light btn-animate btn-white mt-sm-2" href="/signin">Iniciar Sesión</a>
 					</li>
 					<li class="nav-item">
-					  <a class="btn btn-primary me-2 btn-animate" href="/signup">Crear cuenta</a>
+					  <a class="btn btn-light me-2 btn-animate btn-white mt-sm-2" href="/signup">Crear cuenta</a>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</nav>
 
-	<div class="container col-xxl-8 px-4 py-5 hero-section">
+	<div class="container col-xxl-8 px-4 py-5 hero-section" style="z-index: 5">
 		<div class="row flex-lg-row-reverse align-items-center g-5 py-5">
 			<div class="col-10 col-sm-8 col-lg-6">
-				<img src="{% static 'images/pig-home.png' %}" class="d-block mx-lg-auto img-fluid" alt="pig" width="400" loading="lazy">
+				<img src="{% static 'images/finanzas.png' %}" class="d-block mx-lg-auto img-fluid" alt="finance" width="400px" loading="lazy">
 			</div>
-			<div class="col-lg-6">
-				<h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Organiza tu dinero</h1>
+			<div class="col-lg-6" style="padding-inline: 50px;"> 
+				<h1 class="display-5 fw-bold lh-1 mb-3 ">Organiza tu dinero</h1>
 				<p class="lead">Controla tus finanzas de una manera más sencilla.</p>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-start">
-					<a class="btn btn-primary btn-lg px-4 me-md-2 btn-animate" href="/signin">¡Empezar ahora!</a>
+					<a class="btn btn-light btn-lg px-4 me-md-2 btn-animate btn-white" href="/signin">¡Empezar ahora!</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
 
 	<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 
