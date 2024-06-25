@@ -82,7 +82,7 @@ def create_transaction(request):
 		try:
 			(total, avaible, incomes, expenses, saving_current, graphic_values) = get_data(request)
 
-			if request.POST['category'] == 'GASTO' and int(request.POST['value']) > int(avaible):
+			if request.POST['category'] == 'GASTO' and float(request.POST['value']) > float(avaible):
 				return render(request, "create_transaction.html", {'error': 'El saldo disponible es insuficiente.'})
 
 			form = create_transaction_form(request.POST)
@@ -102,11 +102,16 @@ def transaction_details(request, id_transaction):
 		return render(request, 'transaction_details.html', {'transaction': trans})
 	else:
 		try:
+			(total, avaible, incomes, expenses, saving_current, graphic_values) = get_data(request)
+
+			if request.POST['category'] == 'GASTO' and float(request.POST['value']) > float(avaible):
+				return render(request, 'transaction_details.html', {'transaction': trans, 'error': 'El saldo disponible es insuficiente.'})
+
 			form = create_transaction_form(request.POST, instance=trans)
 			form.save()
 			return redirect('transaction')
 		except ValueError:
-			return render(request, "transaction_details.html", {'error': 'Por favor ingresa datos válidos'})
+			return render(request, 'transaction_details.html', {'transaction': trans, 'error': 'El saldo disponible es insuficiente.'})
 
 @login_required
 def delete_transaction(request, id_transaction):
