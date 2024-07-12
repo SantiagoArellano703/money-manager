@@ -20,5 +20,3 @@ Visita
 Para preguntas o sugerencias, puedes contactarme a través de:
 
 * Correo electrónico: santiagoarellano703@gmail.com
-* GitHub: SantiagoArellano703
-
